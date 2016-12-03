@@ -44,6 +44,8 @@ struct IDiceInvaders
 
 	// Returns the keyboard status. If a flag is set, the corresponding key is being held down.
 	virtual void getKeyStatus(KeyStatus& keys) = 0;
+
+	static constexpr int SPRITE_SIZE = 32;
 };
 
 // A factory type for creating IDiceInvaders instances.

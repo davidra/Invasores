@@ -61,11 +61,47 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch/pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch/pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Example.cpp" />
+    <ClCompile Include="core\debug.cpp" />
+    <ClCompile Include="DICEInvaders.cpp" />
+    <ClCompile Include="game\game.cpp" />
+    <ClCompile Include="game\gameobjectmanager.cpp" />
+    <ClCompile Include="game\shiprocket.cpp" />
+    <ClCompile Include="game\playership.cpp" />
+    <ClCompile Include="game\sprite.cpp" />
+    <ClCompile Include="pch\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\base.h" />
+    <ClInclude Include="core\debug.h" />
+    <ClInclude Include="core\gameobjectfactory.h" />
+    <ClInclude Include="core\intrusivelist.h" />
+    <ClInclude Include="core\utils.h" />
     <ClInclude Include="DiceInvaders.h" />
+    <ClInclude Include="game\game.h" />
+    <ClInclude Include="game\gameobject.h" />
+    <ClInclude Include="game\gameobjectmanager.h" />
+    <ClInclude Include="game\shiprocket.h" />
+    <ClInclude Include="game\playership.h" />
+    <ClInclude Include="game\sprite.h" />
+    <ClInclude Include="pch\pch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
