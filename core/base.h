@@ -31,6 +31,10 @@ by David Ramos
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <array>
+#include <tuple>
 
 // Windows headers
 #include <windows.h>
+#define _USE_MATH_DEFINES
+#include <math.h>

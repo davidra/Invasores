@@ -79,6 +79,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="core\debug.cpp" />
+    <ClCompile Include="game\alienbomb.cpp" />
+    <ClCompile Include="game\powerup.cpp" />
     <ClCompile Include="game\textprinter.cpp" />
     <ClCompile Include="DICEInvaders.cpp" />
     <ClCompile Include="game\alien.cpp" />
@@ -99,7 +101,8 @@
     <ClInclude Include="core\coord2d.h" />
     <ClInclude Include="core\debug.h" />
     <ClInclude Include="core\fixedstring.h" />
-    <ClInclude Include="core\gameobjectfactory.h" />
+    <ClInclude Include="game\alienbomb.h" />
+    <ClInclude Include="game\powerup.h" />
     <ClInclude Include="game\textprinter.h" />
     <ClInclude Include="core\utils.h" />
     <ClInclude Include="DiceInvaders.h" />

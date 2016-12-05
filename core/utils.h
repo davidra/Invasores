@@ -28,3 +28,11 @@ static bool isWithinRange(const T& range_start, const T& value, const T& range_e
 	return (value >= range_start) && (value <= range_end);
 }
 
+//----------------------------------------------------------------------------
+// Linear interpolation between two values
+template <class T>
+static T lerp(const T& start, const T& end, const float factor)
+{
+	return start + (end - start) * factor;
+}
+

@@ -12,7 +12,7 @@ by David Ramos
 class cShipRocketDef : public cSpriteDef
 {
 public:
-	cShipRocketDef(float speed = 320.0f, const cAABB2D& damageBox = { {12.0f, 7.0f}, {19.0f, 25.0f} }, const char* spriteName = "data/rocket.bmp")
+	cShipRocketDef(float speed = 400.0f, const cAABB2D& damageBox = { {12.0f, 7.0f}, {19.0f, 25.0f} }, const char* spriteName = "data/rocket.bmp")
 		: cSpriteDef(spriteName)
 		, speed(speed)
 		, damageBox(damageBox)

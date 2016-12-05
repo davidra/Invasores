@@ -48,6 +48,12 @@
     <ClCompile Include="game\textprinter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game\alienbomb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\powerup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DiceInvaders.h">
@@ -72,9 +78,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\gameobjectmanager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="core\gameobjectfactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\utils.h">
@@ -102,6 +105,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\textprinter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\alienBomb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\powerup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

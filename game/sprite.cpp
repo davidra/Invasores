@@ -25,5 +25,22 @@ void cSprite::init(const IGameObjectDef& gameObjectDef)
 //----------------------------------------------------------------------------
 void cSprite::draw(float )
 {
-	m_sprite->draw(static_cast<int>(m_coord.x), static_cast<int>(m_coord.y));
+	bool phasedIn = true;
+	
+	if (m_blinkChangesPerSecond > 0)
+	{
+		const float totalTime = cGame::get().getInterface().getElapsedTime();
+		const float totalTimeDecimalPart = totalTime - static_cast<int>(totalTime);
+		phasedIn = sin(M_PI * totalTimeDecimalPart * m_blinkChangesPerSecond) >= 0.0f;
+	}
+
+	if (m_show && phasedIn)
+	{
+		m_sprite->draw(static_cast<int>(m_coord.x), static_cast<int>(m_coord.y));
+	}
+	else
+	{
+		// "Hiding" is just drawing it outside of the screen
+		m_sprite->draw(cGame::get().getScreenWidth(), cGame::get().getScreenHeight());
+	}
 }

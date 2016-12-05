@@ -41,12 +41,18 @@ void cAlienSquadron::update(float elapsed)
 	// Clamp delta to protect against huge elapsed time values (for example, when debugging)
 	const float minDelta = (0.0f - tolerance)							- m_area.m_min.x;
 	const float maxDelta = (cGame::get().getScreenWidth() + tolerance)	- m_area.m_max.x;
-	const float deltaX = clamp(minDelta, def().hrzSpeed * elapsed * static_cast<float>(m_orientation), maxDelta);
+	const float speed = lerp(def().hrzSpeed, def().hrzMaxSpeed, 1.0f - (static_cast<float>(m_aliensAlive) / m_alienPresence.size()));
+	const float deltaX = clamp(minDelta, speed * elapsed * static_cast<float>(m_orientation), maxDelta);
 	m_gridPos.x += deltaX;
 
 	positionAliens();
 
 	computeAttackArea();
+
+	if (m_area.m_max.y >= cGame::get().getScreenHeight())
+	{
+		cGame::get().onAlienSquadronLanded();
+	}
 }
 
 //----------------------------------------------------------------------------
@@ -88,9 +94,7 @@ bool cAlienSquadron::collideRocket(const cShipRocket& rocket)
 					{
 						cGame::get().onAlienDestroyed(alienObjectId);
 
-						--m_aliensAlive;
-						alien->setPendingDestroy();
-						alienObjectId = INVALID_GAMEOBJECT_ID;
+						destroyAlien(alienObjectId);
 
 						collision = true;
 					}
@@ -100,6 +104,20 @@ bool cAlienSquadron::collideRocket(const cShipRocket& rocket)
 	}
 
 	return collision;
+}
+
+//----------------------------------------------------------------------------
+void cAlienSquadron::destroyAllAliens()
+{
+	for (tGameObjectId& alienObjectId : m_alienPresence)
+	{
+		if (alienObjectId != INVALID_GAMEOBJECT_ID)
+		{
+			destroyAlien(alienObjectId);
+		}
+	}
+
+	DI_assert(m_aliensAlive == 0, "All aliens should be dead by now");
 }
 
 //----------------------------------------------------------------------------
@@ -125,7 +143,7 @@ void cAlienSquadron::spawnAliensIfNeeded()
 {
 	if (m_aliensAlive == 0)
 	{
-		m_gridPos = {};
+		m_gridPos = def().initialGridPos;
 		m_orientation = O_LEFT_TO_RIGHT;
 		m_area = {};
 
@@ -182,4 +200,14 @@ void cAlienSquadron::computeAttackArea()
 			}
 		}
 	}
+}
+
+//----------------------------------------------------------------------------
+void cAlienSquadron::destroyAlien(tGameObjectId& alienObjectId)
+{
+	IGameObject* const alien = cGame::get().getGameObjectManager().getGameObject(alienObjectId);
+
+	--m_aliensAlive;
+	alien->setPendingDestroy();
+	alienObjectId = INVALID_GAMEOBJECT_ID;
 }

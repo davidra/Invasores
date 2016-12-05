@@ -16,6 +16,11 @@ public:
 		, y(y)
 	{}
 
+	constexpr cCoord2D operator -() const
+	{
+		return cCoord2D(-x, -y);
+	}
+
 	float x;
 	float y;
 };
@@ -49,3 +54,7 @@ inline constexpr cCoord2D operator+ (const cCoord2D& lhs, const cCoord2D& rhs)
 	return cCoord2D(lhs.x + rhs.x, lhs.y + rhs.y);
 }
 
+inline constexpr cCoord2D operator- (const cCoord2D& lhs, const cCoord2D& rhs)
+{
+	return lhs + -rhs;
+}

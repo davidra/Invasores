@@ -5,6 +5,11 @@
 #include "game/shiprocket.h"
 #include "DiceInvaders.h"
 
+namespace
+{
+	const float g_rapidFirePeriod = 0.1f;
+}
+
 const cPlayerShipDef s_defaultPlayerShipDef;
 
 //----------------------------------------------------------------------------
@@ -29,6 +34,7 @@ void cPlayerShip::update(float elapsed)
 
 	cGame& game = cGame::get();
 
+	// Update position
 	IDiceInvaders::KeyStatus keys;
 	game.getInterface().getKeyStatus(keys);
 	if (keys.right)
@@ -42,10 +48,44 @@ void cPlayerShip::update(float elapsed)
 
 	m_coord.x = clamp(0.0f, m_coord.x, static_cast<float>(game.getScreenWidth() - IDiceInvaders::SPRITE_SIZE));
 
+	// Fire rockets if needed
+	const bool rapidFireActive = m_rapidFireTimer > 0.0f;
 	const float currentTime = game.getInterface().getElapsedTime();
-	if (keys.fire && ((currentTime - m_lastShot) > def().firePeriod))
+	const float firePeriod = rapidFireActive ? g_rapidFirePeriod : def().firePeriod;
+	if (keys.fire && ((currentTime - m_lastShot) > firePeriod))
 	{
 		game.getGameObjectManager().createGameObject<cShipRocket>(s_defaultShipRocket, cCoord2D(m_coord.x, m_coord.y - IDiceInvaders::SPRITE_SIZE));
 		m_lastShot = currentTime;
 	}
+
+	// Update rapid fire
+	if (rapidFireActive)
+	{
+		m_rapidFireTimer -= elapsed;
+	}
+
+	// Update invulnerability
+	if (isInvulnerable())
+	{
+		m_invulnerableTimer -= elapsed;
+		if (m_invulnerableTimer <= 0.0f)
+		{
+			blink(0);
+		}
+	}
+}
+
+//----------------------------------------------------------------------------
+void cPlayerShip::onHit()
+{
+	onInvulnerable(def().invulnerableTimeAfterHit);
+}
+
+//----------------------------------------------------------------------------
+void cPlayerShip::onInvulnerable(float timer) 
+{ 
+	constexpr unsigned blinkChangesPerSecond = 10;
+	blink(blinkChangesPerSecond);
+
+	m_invulnerableTimer = timer; 
 }
