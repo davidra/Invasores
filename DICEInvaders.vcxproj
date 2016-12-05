@@ -66,6 +66,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch/pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,11 +74,15 @@
       <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch/pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="core\debug.cpp" />
+    <ClCompile Include="game\textprinter.cpp" />
     <ClCompile Include="DICEInvaders.cpp" />
+    <ClCompile Include="game\alien.cpp" />
+    <ClCompile Include="game\aliensquadron.cpp" />
     <ClCompile Include="game\game.cpp" />
     <ClCompile Include="game\gameobjectmanager.cpp" />
     <ClCompile Include="game\shiprocket.cpp" />
@@ -89,12 +94,17 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\aabb2d.h" />
     <ClInclude Include="core\base.h" />
+    <ClInclude Include="core\coord2d.h" />
     <ClInclude Include="core\debug.h" />
+    <ClInclude Include="core\fixedstring.h" />
     <ClInclude Include="core\gameobjectfactory.h" />
-    <ClInclude Include="core\intrusivelist.h" />
+    <ClInclude Include="game\textprinter.h" />
     <ClInclude Include="core\utils.h" />
     <ClInclude Include="DiceInvaders.h" />
+    <ClInclude Include="game\alien.h" />
+    <ClInclude Include="game\aliensquadron.h" />
     <ClInclude Include="game\game.h" />
     <ClInclude Include="game\gameobject.h" />
     <ClInclude Include="game\gameobjectmanager.h" />

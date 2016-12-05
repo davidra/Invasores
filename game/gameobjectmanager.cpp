@@ -28,7 +28,10 @@ void cGameObjectManager::update(float elapsed)
 	// add those objects which creation was deferred
 	for (IGameObject* const gameObject : m_deferredCreationObjects)
 	{
-		m_gameObjects.push_back(gameObject);
+		if (!gameObject->isPendingDestroy())
+		{
+			m_gameObjects.push_back(gameObject);
+		}
 	}
 	m_deferredCreationObjects.clear();
 
@@ -72,12 +75,12 @@ void cGameObjectManager::update(float elapsed)
 }
 
 //----------------------------------------------------------------------------
-void cGameObjectManager::draw()
+void cGameObjectManager::draw(float elapsed)
 {
 	m_iteratingObjects = true;
 	for (IGameObject* const gameObject : m_gameObjects)
 	{
-		gameObject->draw();
+		gameObject->draw(elapsed);
 	}
 	m_iteratingObjects = false;
 }

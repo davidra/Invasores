@@ -39,6 +39,15 @@
     <ClCompile Include="game\sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game\aliensquadron.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\alien.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\textprinter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DiceInvaders.h">
@@ -71,13 +80,28 @@
     <ClInclude Include="core\utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\intrusivelist.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game\shiprocket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\aabb2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\coord2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\alien.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\aliensquadron.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\fixedstring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\textprinter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,7 +13,7 @@ by David Ramos
 class cPlayerShipDef : public cSpriteDef
 {
 public:
-	cPlayerShipDef(float vertPos = 480 - 32, float speed = 160.0f, float firePeriod = 0.5f, const char* spriteName = "data/player.bmp")
+	constexpr cPlayerShipDef(float vertPos = 480 - 32, float speed = 160.0f, float firePeriod = 0.5f, const char* spriteName = "data/player.bmp")
 		: cSpriteDef(spriteName)
 		, vertPos(vertPos)
 		, speed(speed)
@@ -31,7 +31,7 @@ class cPlayerShip : public cSprite
 	REGISTER_GAMEOBJECT(cPlayerShip);
 
 public:
-	cPlayerShip(int initialXPos);
+	cPlayerShip(float initialXPos);
 
 	void init(const IGameObjectDef& gameObjectDef) override;
 	void update(float elapsed) override;

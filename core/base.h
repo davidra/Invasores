@@ -2,7 +2,7 @@
 /***************************************************************************************************
 base.h
 
-common base header files used by most source files
+external basic libraries header files used by all source files
  
 by David Ramos
 ***************************************************************************************************/
@@ -12,6 +12,7 @@ by David Ramos
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <limits.h>
 
 #include <algorithm>
 #include <functional>

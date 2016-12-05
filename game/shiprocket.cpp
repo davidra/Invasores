@@ -1,13 +1,14 @@
 #include "pch/pch.h"
 
 #include "game/shiprocket.h"
+#include "game/aliensquadron.h"
 #include "game/game.h"
 
 const cShipRocketDef s_defaultShipRocket;
 
 //----------------------------------------------------------------------------
-cShipRocket::cShipRocket(float hrzPos, float vrtPos)
-	: cSprite(hrzPos, vrtPos)
+cShipRocket::cShipRocket(const cCoord2D& initialPos)
+	: cSprite(initialPos)
 {
 }
 
@@ -16,12 +17,11 @@ void cShipRocket::update(float elapsed)
 {
 	cSprite::update(elapsed);
 
-	m_vrtPos -= def().speed * elapsed;
+	m_coord.y -= def().speed * elapsed;
 
-	if (m_vrtPos < 0)
+	// Destroy if going off the screen or colliding with the aliens
+	if ((m_coord.y < 0) || cGame::get().getAlienSquadron()->collideRocket(*this))
 	{
 		setPendingDestroy();
 	}
-
-	// Collide with the aliens
 }

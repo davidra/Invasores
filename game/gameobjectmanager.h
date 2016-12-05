@@ -2,15 +2,20 @@
 /***************************************************************************************************
 gameobjectmanager.h
 
-Class manager of game objects
+Description:
+	Class manager of game objects. 
+
+Remarks:
+- Objects are owned by the manager and their pointers don't change (no swap
+erase of entire objects or things like that)
  
 by David Ramos
 ***************************************************************************************************/
-class IGameObject;
-class IGameObjectDef;
+struct IGameObject;
+struct IGameObjectDef;
 
 typedef IGameObject* tGameObjectId;
-static constexpr tGameObjectId INVALID_GAMEOBJECT_ID = 0;
+static constexpr tGameObjectId INVALID_GAMEOBJECT_ID = nullptr;
 
 //----------------------------------------------------------------------------
 class cGameObjectManager
@@ -23,7 +28,7 @@ public:
 	tGameObjectId createGameObject(const typename tGameObject::tGameObjectDef& gameObjectDef, Args&&... constructorArgs);
 
 	void update(float elapsed);
-	void draw();
+	void draw(float elapsed);
 
 	// A tGameObjectId is actually just the pointer to the game object. In a more fleshed-out system it would be a proper handle
 	IGameObject*	getGameObject(tGameObjectId game_object_id) const { return game_object_id; }

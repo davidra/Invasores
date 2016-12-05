@@ -8,13 +8,13 @@ by David Ramos
 ***************************************************************************************************/
 #include "game/gameobject.h"
 
-class ISprite;
+struct ISprite;
 
 //----------------------------------------------------------------------------
 class cSpriteDef : public IGameObjectDef
 {
 public:
-	cSpriteDef(const char* spriteName)
+	constexpr cSpriteDef(const char* spriteName)
 		: spriteName(spriteName)
 	{}
 
@@ -27,17 +27,18 @@ class cSprite : public IGameObject
 	REGISTER_GAMEOBJECT(cSprite);
 
 public:
-	cSprite(float hrzPos, float vrtPos)
-		: m_hrzPos(hrzPos)
-		, m_vrtPos(vrtPos)
+	cSprite(const cCoord2D& coord)
+		: m_coord(coord)
 	{}
 
-	void init(const IGameObjectDef& gameObjectDef) override;
-	void update(float) override {};
-	void draw() override;
+	~cSprite() override;
+
+	void			init(const IGameObjectDef& gameObjectDef) override;
+	void			update(float) override {};
+	void			draw(float elapsed) override;
+	const cCoord2D&	getPos() const { return m_coord; }
 
 protected:
 	ISprite*	m_sprite = nullptr;
-	float		m_hrzPos = 0;
-	float		m_vrtPos = 0;
+	cCoord2D	m_coord;
 };

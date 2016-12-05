@@ -8,8 +8,8 @@
 const cPlayerShipDef s_defaultPlayerShipDef;
 
 //----------------------------------------------------------------------------
-cPlayerShip::cPlayerShip(int initialXPos) 
-	: cSprite(initialXPos, 0)
+cPlayerShip::cPlayerShip(float initialXPos) 
+	: cSprite(cCoord2D(initialXPos, 0.0f))
 {}
 
 //----------------------------------------------------------------------------
@@ -17,7 +17,7 @@ void cPlayerShip::init(const IGameObjectDef& gameObjectDef)
 {
 	cSprite::init(gameObjectDef);
 
-	m_vrtPos = def().vertPos;
+	m_coord.y = def().vertPos;
 }
 
 //----------------------------------------------------------------------------
@@ -33,19 +33,19 @@ void cPlayerShip::update(float elapsed)
 	game.getInterface().getKeyStatus(keys);
 	if (keys.right)
 	{
-		m_hrzPos += moveDelta;
+		m_coord.x += moveDelta;
 	}
 	else if (keys.left)
 	{
-		m_hrzPos -= moveDelta;
+		m_coord.x -= moveDelta;
 	}
 
-	m_hrzPos = clamp<float>(0, m_hrzPos, game.getScreenWidth() - IDiceInvaders::SPRITE_SIZE);
+	m_coord.x = clamp(0.0f, m_coord.x, static_cast<float>(game.getScreenWidth() - IDiceInvaders::SPRITE_SIZE));
 
 	const float currentTime = game.getInterface().getElapsedTime();
 	if (keys.fire && ((currentTime - m_lastShot) > def().firePeriod))
 	{
-		game.getGameObjectManager().createGameObject<cShipRocket>(s_defaultShipRocket, m_hrzPos, m_vrtPos - IDiceInvaders::SPRITE_SIZE);
+		game.getGameObjectManager().createGameObject<cShipRocket>(s_defaultShipRocket, cCoord2D(m_coord.x, m_coord.y - IDiceInvaders::SPRITE_SIZE));
 		m_lastShot = currentTime;
 	}
 }

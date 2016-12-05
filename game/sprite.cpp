@@ -5,6 +5,15 @@
 #include "DiceInvaders.h"
 
 //----------------------------------------------------------------------------
+cSprite::~cSprite()
+{
+	if (m_sprite)
+	{
+		m_sprite->destroy();
+	}
+}
+
+//----------------------------------------------------------------------------
 void cSprite::init(const IGameObjectDef& gameObjectDef)
 {
 	IGameObject::init(gameObjectDef);
@@ -14,7 +23,7 @@ void cSprite::init(const IGameObjectDef& gameObjectDef)
 }
 
 //----------------------------------------------------------------------------
-void cSprite::draw()
+void cSprite::draw(float )
 {
-	m_sprite->draw(m_hrzPos, m_vrtPos);
+	m_sprite->draw(static_cast<int>(m_coord.x), static_cast<int>(m_coord.y));
 }

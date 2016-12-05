@@ -5,8 +5,10 @@
 
 namespace
 {
-	int DEFAULT_WIDTH = 640;
-	int DEFAULT_HEIGHT = 480;
+	const int DEFAULT_WIDTH = 640;
+	const int DEFAULT_HEIGHT = 480;
+
+	float debug_time_scale = 1.0f;
 }
 
 class DiceInvadersLib
@@ -60,11 +62,11 @@ int APIENTRY WinMain(
 	while (system.update())
 	{
 		const float newTime = system.getElapsedTime();
-		const float elapsed = newTime - lastTime;
+		const float elapsed = (newTime - lastTime) * debug_time_scale;
 		lastTime = newTime;
 
 		invadersGame.update(elapsed);
-		invadersGame.draw();
+		invadersGame.draw(elapsed);
 	}
 
 	invadersGame.shutDown();

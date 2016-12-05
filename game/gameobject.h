@@ -26,7 +26,7 @@ struct IGameObject
 	virtual void init(const IGameObjectDef& gameObjectDef) { m_def = &gameObjectDef; }
 
 	virtual void update(float elapsed) = 0;
-	virtual void draw() = 0;
+	virtual void draw(float elapsed) = 0;
 
 	bool isPendingDestroy() const { return m_isPendingDestroy; }
 	void setPendingDestroy() { m_isPendingDestroy = true; }
